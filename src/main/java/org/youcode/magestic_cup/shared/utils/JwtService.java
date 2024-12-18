@@ -3,10 +3,12 @@ package org.youcode.magestic_cup.shared.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,11 +18,14 @@ import java.util.function.Function;
 @Component
 public class JwtService {
 
-    @Value("${JWT_SECRET_KEY}")
-    private Key jwtSecretKey;
+    private final Key jwtSecretKey;
+    private final Long expirationTime;
 
-    @Value("${JWT_EXPIRATION_TIME}")
-    private Long expirationTime;
+    public JwtService(@Value("${JWT_SECRET_KEY}") String secretKey,
+                      @Value("${JWT_EXPIRATION_TIME}") Long expirationTime) {
+        this.jwtSecretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+        this.expirationTime = expirationTime;
+    }
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
