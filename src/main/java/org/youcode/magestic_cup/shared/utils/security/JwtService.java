@@ -1,4 +1,4 @@
-package org.youcode.magestic_cup.shared.utils;
+package org.youcode.magestic_cup.shared.utils.security;
 
 
 import io.jsonwebtoken.Claims;
