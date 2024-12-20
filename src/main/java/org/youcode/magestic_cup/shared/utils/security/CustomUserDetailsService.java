@@ -13,8 +13,8 @@ import org.youcode.magestic_cup.user.UserDAO;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 @AllArgsConstructor
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserDAO userDAO;

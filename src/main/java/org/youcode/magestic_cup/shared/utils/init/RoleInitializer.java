@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.youcode.magestic_cup.role.Role;
 import org.youcode.magestic_cup.role.RoleDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -14,15 +15,18 @@ public class RoleInitializer {
     private final RoleDAO roleDAO;
 
     @PostConstruct
-    public void initializeRoles() {
-        List<String> roleNames = List.of("OPERATOR", "ADMIN");
+    public void initRoles() {
+        if (roleDAO.findAll().isEmpty()) {
+            Role adminRole = new Role();
+            adminRole.setRoleName("ADMIN");
+            adminRole.setUsers(new ArrayList<>());
 
-        for (String roleName : roleNames) {
-            if (!roleDAO.existsByRoleName(roleName)) {
-                Role role = new Role();
-                role.setRoleName(roleName);
-                roleDAO.save(role);
-            }
+            Role operatorRole = new Role();
+            operatorRole.setRoleName("OPERATOR");
+            operatorRole.setUsers(new ArrayList<>());
+
+            roleDAO.saveAll(List.of(adminRole, operatorRole));
+            System.out.println("Roles initialized: ADMIN and OPERATOR");
         }
     }
 }

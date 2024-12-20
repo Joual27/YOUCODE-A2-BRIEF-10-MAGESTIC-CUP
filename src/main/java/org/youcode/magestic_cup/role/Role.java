@@ -14,12 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection = "roles")
+@Document(collection = "ROLES")
 public class Role {
     @Id
     private String id;
     private String roleName;
     @DBRef
     private List<User> users;
-
 }
