@@ -16,7 +16,7 @@ services:
     networks:
       - app-network
   db:
-    image: mongo:latest
+    image: mongodb/mongodb-community-server:6.0-ubi8
     container_name: mongo-db
     ports:
       - "27017:27017"
@@ -26,11 +26,11 @@ services:
       - MONGO_INITDB_DATABASE=${DB_NAME}
     networks:
       - app-network
+    volumes:
+      - mongo-data:/data/db
 
 volumes:
   mongo-data:
 
 networks:
-  app-network :
-    driver: bridge
-
+  app-network: {}

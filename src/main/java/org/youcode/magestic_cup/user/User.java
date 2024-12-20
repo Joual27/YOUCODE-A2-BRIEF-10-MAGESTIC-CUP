@@ -1,6 +1,7 @@
 package org.youcode.magestic_cup.user;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "users")
+@Document(collection = "USERS")
+@Data
 public class User implements UserDetails {
     @Id
     private String id;

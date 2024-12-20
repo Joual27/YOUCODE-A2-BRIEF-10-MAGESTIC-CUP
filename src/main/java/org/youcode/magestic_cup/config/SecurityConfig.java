@@ -7,15 +7,19 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.youcode.magestic_cup.shared.utils.JwtReqFilter;
+import org.youcode.magestic_cup.shared.utils.security.CustomAccessDeniedHandler;
+import org.youcode.magestic_cup.shared.utils.security.JwtReqFilter;
 
 @AllArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
     private final JwtReqFilter jwtReqFilter;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -30,7 +34,17 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling.accessDeniedHandler(accessDeniedHandler)
+                )
                 .addFilterBefore(jwtReqFilter , UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

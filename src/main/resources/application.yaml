@@ -1,3 +1,7 @@
 spring:
   application:
     name: majestic-cup
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
+
