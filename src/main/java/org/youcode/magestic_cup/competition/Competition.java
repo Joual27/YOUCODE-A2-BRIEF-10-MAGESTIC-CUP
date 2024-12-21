@@ -20,12 +20,9 @@ public class Competition {
     private String id;
     private String name;
     private int numberOfTeams;
-
     @DBRef
     private List<Team> teams;
-
     private int currentRound;
-
     @DBRef
     private List<Round> rounds;
 
