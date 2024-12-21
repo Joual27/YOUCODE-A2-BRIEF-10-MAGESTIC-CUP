@@ -17,6 +17,7 @@ public class CompetitionServiceImp implements CompetitionService {
     private final CreateCompetitionDTOToCompetitionDocumentMapper createCompetitionDTOToCompetitionDocumentMapper;
     private final CompetitionDocumentToCompetitionResponseDTOMapper competitionDocumentToCompetitionResponseDTOMapper;
 
+    @Override
     public CompetitionResponseDTO save(CreateCompetitionDTO data){
         if (!isValidNumberOfTeams(data.numberOfTeams())){
             throw new InvalidNumberOfTeamsException("Number of teams must be either 8 | 16 | 32 | 64");
