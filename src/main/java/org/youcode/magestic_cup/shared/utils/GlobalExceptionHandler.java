@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.youcode.magestic_cup.exceptions.EntityNotFoundException;
+import org.youcode.magestic_cup.exceptions.InvalidNumberOfTeamsException;
 import org.youcode.magestic_cup.exceptions.UsernameAlreadyExistsException;
 import org.youcode.magestic_cup.shared.utils.DTOs.ErrorDTO;
 
@@ -62,6 +63,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorDTO handleBadCredentialsException(BadCredentialsException e) {
         return new ErrorDTO(HttpStatus.FORBIDDEN.value(), "Invalid Credentials", LocalDateTime.now());
+    }
+
+
+    @ExceptionHandler(InvalidNumberOfTeamsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleInvalidNumberOfTeamsException(InvalidNumberOfTeamsException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
     }
 
 

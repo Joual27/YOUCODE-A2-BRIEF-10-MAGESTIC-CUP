@@ -23,8 +23,6 @@ public class Round {
     private int roundNumber;
     @DBRef
     private Competition competition;
-
     @DBRef
     private List<Match> matches;
-
 }
