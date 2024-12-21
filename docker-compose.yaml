@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8080:8080",r
+      - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=${ACTIVE_PROFILE}
       - SPRING_DATA_MONGODB_URI=mongodb://${DB_AUTH_USERNAME}:${DB_AUTH_PASSWORD}@db:27017/${DB_NAME}?authSource=admin
