@@ -24,4 +24,10 @@ public class UserController {
         UserResponseDTO res = userService.register(req);
         return new ResponseEntity<>(new SuccessDTO<>("success" , "User registered successfully " , res) , HttpStatus.OK);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<SuccessDTO<UserResponseDTO>> login(@RequestBody @Valid AuthDTO req){
+        UserResponseDTO res = userService.authenticate(req);
+        return new ResponseEntity<>(new SuccessDTO<>("success" , "Logged successfully " , res) , HttpStatus.OK);
+    }
 }
