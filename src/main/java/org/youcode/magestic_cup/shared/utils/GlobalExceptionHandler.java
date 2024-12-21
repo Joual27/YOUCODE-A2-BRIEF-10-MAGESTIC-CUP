@@ -1,5 +1,6 @@
 package org.youcode.magestic_cup.shared.utils;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -56,4 +57,12 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
     }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorDTO handleBadCredentialsException(BadCredentialsException e) {
+        return new ErrorDTO(HttpStatus.FORBIDDEN.value(), "Invalid Credentials", LocalDateTime.now());
+    }
+
+
 }
