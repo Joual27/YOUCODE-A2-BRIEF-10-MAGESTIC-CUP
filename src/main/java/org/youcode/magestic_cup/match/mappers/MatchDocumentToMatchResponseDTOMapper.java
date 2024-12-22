@@ -6,6 +6,6 @@ import org.youcode.magestic_cup.match.Match;
 import org.youcode.magestic_cup.shared.utils.interfaces.BaseMapper;
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring" , uses = {})
 public interface MatchDocumentToMatchResponseDTOMapper extends BaseMapper<Match , MatchResponseDTO> {
 }

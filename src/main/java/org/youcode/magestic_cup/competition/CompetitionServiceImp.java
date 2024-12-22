@@ -8,11 +8,13 @@ import org.youcode.magestic_cup.competition.interfaces.CompetitionService;
 import org.youcode.magestic_cup.competition.mappers.CompetitionDocumentToCompetitionResponseDTOMapper;
 import org.youcode.magestic_cup.competition.mappers.CreateCompetitionDTOToCompetitionDocumentMapper;
 import org.youcode.magestic_cup.exceptions.InvalidNumberOfTeamsException;
+import org.youcode.magestic_cup.round.Round;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service
 public class CompetitionServiceImp implements CompetitionService {
-
     private final CompetitionDao competitionDao;
     private final CreateCompetitionDTOToCompetitionDocumentMapper createCompetitionDTOToCompetitionDocumentMapper;
     private final CompetitionDocumentToCompetitionResponseDTOMapper competitionDocumentToCompetitionResponseDTOMapper;
@@ -32,5 +34,11 @@ public class CompetitionServiceImp implements CompetitionService {
             return false;
         }
         return true;
+    }
+    @Override
+    public List<Round> getAllRoundsByCompetitionId(String competitionId) {
+        Competition competition = competitionDao.findById(competitionId)
+                .orElseThrow(() -> new RuntimeException("Competition not found"));
+        return competition.getRounds();
     }
 }
