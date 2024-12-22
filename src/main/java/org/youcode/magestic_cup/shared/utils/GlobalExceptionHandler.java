@@ -77,15 +77,34 @@ public class GlobalExceptionHandler {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
     }
 
-    @ExceptionHandler(PlayerDoesntBelongToGameException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorDTO handlePlayerDoesntBelongToGameException(PlayerDoesntBelongToGameException e) {
-        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
-    }
 
     @ExceptionHandler(StatsLimitExceededException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDTO handleStatsLimitExceededException(StatsLimitExceededException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
+    }
+
+    @ExceptionHandler(NotEligiblePlayersException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleNotEligiblePlayersException(NotEligiblePlayersException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
+    }
+
+    @ExceptionHandler(PlayerNotInGameException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handlePlayerNotInGameException(PlayerNotInGameException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
+    }
+
+    @ExceptionHandler(TeamStatsLimitExceededException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleTeamStatsLimitExceededException(TeamStatsLimitExceededException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
+    }
+
+    @ExceptionHandler(UnmatchedResultGoalsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleUnmatchedResultGoalsException(UnmatchedResultGoalsException e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
     }
 

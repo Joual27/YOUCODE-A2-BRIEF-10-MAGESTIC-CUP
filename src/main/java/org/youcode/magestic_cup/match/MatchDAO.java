@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 public interface MatchDAO extends MongoRepository<Match , String> {
-
     List<Match> findByRoundId(String roundId);
 }
