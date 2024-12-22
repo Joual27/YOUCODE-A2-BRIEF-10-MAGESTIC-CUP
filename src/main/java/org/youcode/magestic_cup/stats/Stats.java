@@ -1,5 +1,6 @@
 package org.youcode.magestic_cup.stats;
 
+import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,9 @@ public class Stats {
     private Player player;
     private int goals;
     private int assists;
+    @Max(1)
     private int yellowCards;
+    @Max(1)
     private int redCards;
 
 }
