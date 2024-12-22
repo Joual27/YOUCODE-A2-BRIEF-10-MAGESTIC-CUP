@@ -6,10 +6,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.youcode.magestic_cup.exceptions.EntityNotFoundException;
-import org.youcode.magestic_cup.exceptions.InvalidNumberOfTeamsException;
-import org.youcode.magestic_cup.exceptions.TeamNameAlreadyExistsException;
-import org.youcode.magestic_cup.exceptions.UsernameAlreadyExistsException;
+import org.youcode.magestic_cup.exceptions.*;
 import org.youcode.magestic_cup.shared.utils.DTOs.ErrorDTO;
 
 
@@ -74,9 +71,21 @@ public class GlobalExceptionHandler {
     }
 
 
-     @ExceptionHandler(TeamNameAlreadyExistsException.class)
+    @ExceptionHandler(TeamNameAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDTO handleTeamNameAlreadyExistsException(TeamNameAlreadyExistsException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
+    }
+
+    @ExceptionHandler(PlayerDoesntBelongToGameException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handlePlayerDoesntBelongToGameException(PlayerDoesntBelongToGameException e) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
+    }
+
+    @ExceptionHandler(StatsLimitExceededException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleStatsLimitExceededException(StatsLimitExceededException e) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST.value(), e.getMessage() , LocalDateTime.now());
     }
 

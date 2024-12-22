@@ -55,4 +55,10 @@ public class TeamServiceImp implements TeamService {
         teamDao.save(existingTeam);
         return teamDocumentToTeamResponseDTOMapper.documentToDto(existingTeam);
     }
+
+    @Override
+    public Team getTeamDocumentById(String id){
+        return teamDao.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No team was found with given ID "));
+    }
 }
