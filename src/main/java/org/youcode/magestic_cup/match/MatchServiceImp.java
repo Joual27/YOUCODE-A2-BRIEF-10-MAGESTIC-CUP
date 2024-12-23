@@ -62,7 +62,7 @@ public class MatchServiceImp implements MatchService {
                 .map(Player::getId)
                 .toList();
 
-        List<String> awayPlayerIds = away.getPlayers().stream()
+        List<String> awayPlay,erIds = away.getPlayers().stream()
                 .map(Player::getId)
                 .toList();
 
@@ -107,7 +107,6 @@ public class MatchServiceImp implements MatchService {
             List<Stats> previousStats = statsService.getPlayerStatsPreviousToRound(player.getId(), currentRound.getId());
             int yellowCards = previousStats.stream().mapToInt(Stats::getYellowCards).sum();
             int redCards = previousStats.stream().mapToInt(Stats::getRedCards).sum();
-
             return yellowCards < 2 && redCards == 0;
         });
     }
